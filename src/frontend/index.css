@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.375rem;
+
+    /* ── Core Palette (OKLCH raw L C H) ── */
+    --background:        0.99 0 0;
+    --foreground:        0.10 0 0;
+
+    --card:              0.99 0 0;
+    --card-foreground:   0.10 0 0;
+
+    --popover:           0.99 0 0;
+    --popover-foreground: 0.10 0 0;
+
+    /* Primary = near-black */
+    --primary:           0.10 0 0;
+    --primary-foreground: 0.98 0 0;
+
+    /* Secondary = light grey */
+    --secondary:         0.96 0 0;
+    --secondary-foreground: 0.10 0 0;
+
+    /* Muted = light grey sections */
+    --muted:             0.95 0 0;
+    --muted-foreground:  0.45 0 0;
+
+    /* Accent = pale highlight */
+    --accent:            0.98 0.025 96;
+    --accent-foreground: 0.10 0 0;
+
+    --destructive:       0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border:            0.91 0.005 80;
+    --input:             0.91 0.005 80;
+    --ring:              0.70 0 0;
+
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    --sidebar:           0.985 0 0;
+    --sidebar-foreground: 0.145 0 0;
+    --sidebar-primary:   0.205 0 0;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent:    0.97 0 0;
+    --sidebar-accent-foreground: 0.205 0 0;
+    --sidebar-border:    0.922 0 0;
+    --sidebar-ring:      0.708 0 0;
+
+    /* ── Brand Tokens ── */
+    --ennoble-cream:     0.987 0.018 96;
+    --ennoble-pale-yellow: 0.982 0.030 96;
+    --ennoble-grey-bg:   0.956 0 0;
+    --ennoble-border:    0.910 0 0;
+    --ennoble-text:      0.10 0 0;
+    --ennoble-subtext:   0.45 0 0;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ─── Custom utilities ─── */
+@layer utilities {
+  .font-display {
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+
+  .font-body {
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+
+  .text-ennoble {
+    color: oklch(var(--ennoble-text));
+  }
+
+  .text-subtext {
+    color: oklch(var(--ennoble-subtext));
+  }
+
+  .bg-grey-section {
+    background-color: oklch(var(--ennoble-grey-bg));
+  }
+
+  .bg-pale-yellow {
+    background-color: oklch(var(--ennoble-pale-yellow));
+  }
+
+  .border-ennoble {
+    border-color: oklch(var(--ennoble-border));
+  }
+
+  /* ─── P0: Section eyebrow label with left-rule accent ─── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.6875rem;       /* 11px */
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(var(--ennoble-subtext));
+    margin-bottom: 1.5rem;
+  }
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background-color: oklch(var(--ennoble-subtext) / 0.45);
+    flex-shrink: 0;
+  }
+
+  /* ─── P2: Refined card lift transition ─── */
+  .card-lift {
+    transition:
+      box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .card-lift:hover {
+    box-shadow: 0 8px 28px 0 rgba(0, 0, 0, 0.09), 0 2px 8px -1px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+  }
+
+  /* ─── P2: Button transition scoped (not transition-all) ─── */
+  .btn-primary {
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease,
+      transform 0.12s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Chatbot markdown rendering */
+  .chat-message strong {
+    font-weight: 700;
+  }
+
+  .chat-message a {
+    text-decoration: underline;
+    color: oklch(var(--ennoble-text));
+  }
+
+  /* Pulse animation for WhatsApp button */
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+    70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  /* Fade-in animation for portfolio tab panels */
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.25s ease-out both;
+  }
+}
